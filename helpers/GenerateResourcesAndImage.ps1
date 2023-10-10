@@ -196,10 +196,7 @@ Function GenerateResourcesAndImage {
     $TagsList = $Tags.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }
     Write-Debug "Tags list: $TagsList."
     $TagsJson = $Tags | ConvertTo-Json -Compress
-    if ($PSVersionTable.PSVersion.Major -eq 5) {
-        Write-Verbose "PowerShell 5 detected. Replacing double quotes with escaped double quotes in tags JSON."
-        $TagsJson = $TagsJson -replace '"', '\"' -replace ':', '='
-    }
+    $TagsJson = $TagsJson -replace '"', '\"' -replace ':', '='
     Write-Debug "Tags JSON: $TagsJson."
     if ($TemplatePath.Contains(".json")) {
         Write-Verbose "Injecting tags into packer template."
