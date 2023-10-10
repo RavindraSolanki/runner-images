@@ -198,7 +198,7 @@ Function GenerateResourcesAndImage {
     $TagsJson = $Tags | ConvertTo-Json -Compress
     if ($PSVersionTable.PSVersion.Major -eq 5) {
         Write-Verbose "PowerShell 5 detected. Replacing double quotes with escaped double quotes in tags JSON."
-        $TagsJson = $TagsJson -replace '"', '\"'
+        $TagsJson = $TagsJson -replace '"', '\"' -replace ':', '='
     }
     Write-Debug "Tags JSON: $TagsJson."
     if ($TemplatePath.Contains(".json")) {
